@@ -1,5 +1,5 @@
 {
-    "name": "trappar/alice-generator",
+    "name": "obiz-concept/alice-generator",
     "description": "Automatically generates alice fixture based on a set of objects",
     "keywords": ["alice", "fixture", "data", "test", "generator", "orm", "doctrine"],
     "type": "library",
@@ -14,7 +14,7 @@
         "php": "^7.1",
         "symfony/yaml": "^2.8||^3.0|^4.0",
         "doctrine/common": "^2.6",
-        "jms/metadata": "^1.5"
+        "jms/metadata": "^2.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.6",
