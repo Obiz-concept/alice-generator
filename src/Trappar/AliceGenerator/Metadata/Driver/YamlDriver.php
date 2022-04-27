@@ -2,6 +2,7 @@
 
 namespace Trappar\AliceGenerator\Metadata\Driver;
 
+use Metadata\ClassMetadata;
 use Metadata\Driver\AbstractFileDriver;
 use Metadata\MergeableClassMetadata;
 use Symfony\Component\Yaml\Yaml;
@@ -18,7 +19,7 @@ class YamlDriver extends AbstractFileDriver
      *
      * @return \Metadata\ClassMetadata|null
      */
-    protected function loadMetadataFromFile(\ReflectionClass $class, $file)
+    protected function loadMetadataFromFile(\ReflectionClass $class, string $file): ?ClassMetadata
     {
         $config = Yaml::parse(file_get_contents($file));
 
@@ -76,7 +77,7 @@ class YamlDriver extends AbstractFileDriver
      *
      * @return string
      */
-    protected function getExtension()
+    protected function getExtension(): string
     {
         return 'yml';
     }

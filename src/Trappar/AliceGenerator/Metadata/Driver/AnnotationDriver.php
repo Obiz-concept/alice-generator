@@ -7,6 +7,7 @@ use Metadata\Driver\DriverInterface;
 use Metadata\MergeableClassMetadata;
 use Trappar\AliceGenerator\Annotation as Fixture;
 use Trappar\AliceGenerator\Metadata\PropertyMetadata;
+use Metadata\ClassMetadata;
 
 class AnnotationDriver implements DriverInterface
 {
@@ -25,7 +26,7 @@ class AnnotationDriver implements DriverInterface
      *
      * @return \Metadata\ClassMetadata
      */
-    public function loadMetadataForClass(\ReflectionClass $class)
+    public function loadMetadataForClass(\ReflectionClass $class): ?ClassMetadata
     {
         $classMetadata                  = new MergeableClassMetadata($name = $class->name);
         $classMetadata->fileResources[] = $class->getFileName();
