@@ -2,8 +2,7 @@
 
 namespace Trappar\AliceGenerator;
 
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Metadata\MetadataFactory;
 use Trappar\AliceGenerator\Builder\DefaultMetadataDriverFactory;
 use Trappar\AliceGenerator\Builder\MetadataDriverFactoryInterface;
@@ -38,7 +37,7 @@ class FixtureGeneratorBuilder
     /**
      * @var Reader
      */
-    private $annotationReader;
+    private $attributeReader;
     /**
      * @var MetadataResolverInterface
      */
@@ -74,7 +73,7 @@ class FixtureGeneratorBuilder
         $this
             ->setMetadataDriverFactory(new DefaultMetadataDriverFactory())
             ->setPersister(new NonSpecificPersister())
-            ->setAnnotationReader(new AnnotationReader())
+            ->setAttributeReader(new AttributeReader())
             ->setMetadataResolver(
                 new MetadataResolver([
                     new ArrayFakerResolver(),
@@ -145,12 +144,12 @@ class FixtureGeneratorBuilder
     }
 
     /**
-     * @param Reader $annotationReader
+     * @param Reader $attributeReader
      * @return FixtureGeneratorBuilder
      */
-    public function setAnnotationReader(Reader $annotationReader)
+    public function setAttributeReader(Reader $attributeReader)
     {
-        $this->annotationReader = $annotationReader;
+        $this->attributeReader = $attributeReader;
 
         return $this;
     }
@@ -234,7 +233,7 @@ class FixtureGeneratorBuilder
     public function build()
     {
         $metadataFactory = new MetadataFactory(
-            $this->metadataDriverFactory->createDriver($this->metadataDirs, $this->annotationReader)
+            $this->metadataDriverFactory->createDriver($this->metadataDirs, $this->attributeReader)
         );
 
         if (!$this->objectHandlersConfigured) {

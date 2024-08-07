@@ -2,21 +2,21 @@
 
 namespace Trappar\AliceGenerator\Metadata\Driver;
 
-use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Metadata\Driver\DriverInterface;
 use Metadata\MergeableClassMetadata;
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 use Trappar\AliceGenerator\Metadata\PropertyMetadata;
 use Metadata\ClassMetadata;
 
-class AnnotationDriver implements DriverInterface
+class AttributeDriver implements DriverInterface
 {
     /**
-     * @var Reader
+     * @var AttributeReader
      */
     private $reader;
 
-    public function __construct(Reader $reader)
+    public function __construct(AttributeReader $reader)
     {
         $this->reader = $reader;
     }
@@ -33,16 +33,16 @@ class AnnotationDriver implements DriverInterface
 
         foreach ($class->getProperties() as $property) {
             $propertyMetadata = new PropertyMetadata($name, $property->getName());
-            $propertyAnnotations = $this->reader->getPropertyAnnotations($property);
+            $propertyAttributes = $this->reader->getPropertyAttributes($property);
 
-            foreach ($propertyAnnotations as $annotation) {
-                if ($annotation instanceof Fixture\Data) {
-                    $propertyMetadata->staticData = $annotation->value;
-                } elseif ($annotation instanceof Fixture\Faker) {
-                    $propertyMetadata->fakerName = $annotation->name;
-                    $propertyMetadata->fakerResolverType = $annotation->type;
-                    $propertyMetadata->fakerResolverArgs = $annotation->arguments;
-                } elseif ($annotation instanceof Fixture\Ignore) {
+            foreach ($propertyAttributes as $attribute) {
+                if ($attribute instanceof Fixture\Data) {
+                    $propertyMetadata->staticData = $attribute->value;
+                } elseif ($attribute instanceof Fixture\Faker) {
+                    $propertyMetadata->fakerName = $attribute->name;
+                    $propertyMetadata->fakerResolverType = $attribute->type;
+                    $propertyMetadata->fakerResolverArgs = $attribute->arguments;
+                } elseif ($attribute instanceof Fixture\Ignore) {
                     $propertyMetadata->ignore = true;
                 }
             }

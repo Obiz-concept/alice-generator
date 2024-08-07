@@ -1,12 +1,8 @@
 <?php
 
-namespace Trappar\AliceGenerator\Annotation;
+namespace Trappar\AliceGenerator\Attribute;
 
-/**
- * @Annotation
- * @Target({"PROPERTY"})
- */
-final class Faker implements FixtureAnnotationInterface
+final class Faker implements FixtureAttributeInterface
 {
     /**
      * @var string

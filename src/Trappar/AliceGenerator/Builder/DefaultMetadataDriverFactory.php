@@ -2,27 +2,26 @@
 
 namespace Trappar\AliceGenerator\Builder;
 
-use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Metadata\Driver\DriverChain;
 use Metadata\Driver\FileLocator;
-use Trappar\AliceGenerator\Metadata\Driver\AnnotationDriver;
 use Trappar\AliceGenerator\Metadata\Driver\YamlDriver;
 
 class DefaultMetadataDriverFactory implements MetadataDriverFactoryInterface
 {
-    public function createDriver(array $metadataDirs, Reader $annotationReader)
+    public function createDriver(array $metadataDirs, AttributeReader $attributeReader)
     {
-        $annotationDriver = new AnnotationDriver($annotationReader);
+        $attributeReader = new AttributeReader($attributeReader);
 
         if (!empty($metadataDirs)) {
             $fileLocator = new FileLocator($metadataDirs);
 
             return new DriverChain([
                 new YamlDriver($fileLocator),
-                $annotationDriver
+                $attributeReader
             ]);
         } else {
-            return $annotationDriver;
+            return $attributeReader;
         }
     }
 }

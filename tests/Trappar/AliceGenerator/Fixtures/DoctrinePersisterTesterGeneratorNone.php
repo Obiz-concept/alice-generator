@@ -3,7 +3,7 @@
 namespace Trappar\AliceGenerator\Tests\Fixtures;
 
 use Doctrine\ORM\Mapping as ORM;
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 
 /**
  * @ORM\Entity()

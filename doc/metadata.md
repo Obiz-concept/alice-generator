@@ -7,9 +7,10 @@ Often you won't want to use the exact data in your entities when generating fixt
 Data allows you to specify an alternate static value that will always be used for a particular property.
  
 Annotation:
+
 ```php
 <?php
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 
 class User
 {
@@ -39,9 +40,10 @@ User:
 Sometimes you just never want a particular property in an object to be dumped to the fixtures. Maybe you have a field where a cron automatically updates some derived data on a periodic basis - why put this in a fixture if it's just going to need to be derived again anyway? This is why there is Ignore. When this is specified, neither the property nor a value will appear in generated fixtures.
 
 Annotation:
+
 ```php
 <?php
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 
 class User
 {
@@ -72,10 +74,11 @@ User:
 Faker allows you to specify a [Faker](https://github.com/fzaninotto/Faker) provider which will be used in place of the actual value of a property. In its simplest form this looks like:
 
 Annotation:
+
 ```php
 <?php
 
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 
 class User
 {
@@ -104,10 +107,11 @@ User:
 In some cases you may wish to specify arguments for the faker provider. For these situations there is a more complex form for Faker:
 
 Annotation:
+
 ```php
 <?php
 
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 
 class User
 {
@@ -178,10 +182,11 @@ Runs a custom callback to determine the arguments for the faker provider. Argume
 *Calling a method in the same class*
 
 Annotation:
+
 ```php
 <?php
 
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 use Trappar\AliceGenerator\DataStorage\ValueContext;
 
 class User
@@ -222,12 +227,13 @@ User:
 *Calling a static method in a different class*
 
 Annotation:
+
 ```php
 <?php
 
 namespace MyNamespace;
 
-use Trappar\AliceGenerator\Annotation as Fixture;
+use Trappar\AliceGenerator\Attribute as Fixture;
 use Trappar\AliceGenerator\DataStorage\ValueContext;
 
 class User

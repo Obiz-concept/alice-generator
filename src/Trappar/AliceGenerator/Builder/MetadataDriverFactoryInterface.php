@@ -2,16 +2,16 @@
 
 namespace Trappar\AliceGenerator\Builder;
 
-use Doctrine\Common\Annotations\Reader;
+use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Metadata\Driver\DriverInterface;
 
 interface MetadataDriverFactoryInterface
 {
     /**
      * @param array $metadataDirs
-     * @param Reader $annotationReader
+     * @param AttributeReader $attributeReader
      *
      * @return DriverInterface
      */
-    public function createDriver(array $metadataDirs, Reader $annotationReader);
+    public function createDriver(array $metadataDirs, AttributeReader $attributeReader);
 }
